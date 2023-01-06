@@ -1,27 +1,32 @@
 # FnbSignup
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+# Fullstack application designed and devloped by Darian Steyn
+
+![image](https://user-images.githubusercontent.com/39791440/211010354-df7751b6-f00d-4c44-8676-ae1a055f7494.png)
+
+Mongo DB setup
+
+1. Create a container with the mongo image in detached mode so that it is still interactive on your system:
+docker run -p 27017:27017 --name mongo_example -d mongo
+
+2. Create a Docker Volume for the data to reside on by entering the following:
+docker volume create mongo_volume
+
+3. Then create a docker run command to attach the volume to the container and map it to the /data/db container directory by entering
+docker run -it -v mongo_volume:/data/db --name mongo_example4 -d mongo
+
+DB/data structure based on appsettings:
+
+"DatabaseSettings": {
+  "ConnectionString": "mongodb://localhost:27017",
+  "DatabaseName": "AuthDb",
+  "CollectionName":  "Users"
+}
+
+![image](https://user-images.githubusercontent.com/39791440/211009668-fb1a93d7-dcbe-45a7-a318-71998b2b08b1.png)
+
+Start mongo container on docker UI or in terminal. Run Services solution. Clone and run Angular UI locally (https://github.com/DarianSteynDesign/fnbSignup), make sure ports align.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
