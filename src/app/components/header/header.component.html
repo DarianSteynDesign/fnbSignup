@@ -1,0 +1,7 @@
+<p>header works!</p>
+
+<ul class="user-list">
+    <li class="user-item" *ngFor="let user of listOfUsers">
+        <p class="username" (click)="selectUser(user)">{{ user.name }}</p>
+    </li>
+</ul>
