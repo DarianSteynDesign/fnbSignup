@@ -1,0 +1,56 @@
+@import '../../shared/shared-styles/shared-styles.scss';
+
+.header-container {
+    background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
+    
+    .user-container {
+        display: flex;
+        flex-direction: row;
+
+        .user-icon {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .user-text {
+            color: white;
+        }
+    }
+
+    .user-list {
+        .user-item {
+
+        }
+
+        .username {
+
+        }
+    }
+}
+
+@media screen and (min-width: $small) and (max-width: $medium) {
+    .header-container {
+        padding: 20px 0;
+
+        .user-container {
+            margin: auto;
+            width: fit-content;
+    
+            .user-icon {
+
+            }
+    
+            .user-text {
+                margin-left: 10px;
+            }
+        }
+
+        .user-list {
+            width: fit-content;
+            margin: auto;
+        }
+    }
+}

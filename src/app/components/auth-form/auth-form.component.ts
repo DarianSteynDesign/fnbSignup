@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { EventBusService } from 'src/app/services/event-bus.service';
@@ -22,6 +22,15 @@ export class AuthFormComponent implements OnInit {
     private eventBusService: EventBusService
   ) { }
 
+  @HostListener('document:click', ['$event'])
+  documentClick(event: any): void {
+    if(event.target.classList.contains('input')) {
+      this.updateInputState(event, true);
+    } else {
+      this.updateInputState(event, false);
+    }
+  }
+
   ngOnInit(): void {
     this.registerSubscriptions();
   }
@@ -39,10 +48,10 @@ export class AuthFormComponent implements OnInit {
 
       let request: UserModel = {
         "id": genRanHex,
-        "name": "string",
-        "surname": "string",
-        "email": "string",
-        "password": "string"
+        "name": this.name.value,
+        "surname": this.surname.value,
+        "email": this.email.value,
+        "password": this.password.value
       };
 
       if(request){
@@ -84,5 +93,19 @@ export class AuthFormComponent implements OnInit {
     this.surname.patchValue(value.surname);
     this.email.patchValue(value.email);
     this.password.patchValue(value.password);
+  }
+
+  public updateInputState(event: any, state?: boolean): void {
+    if(state){
+      event.target.parentElement.classList.add('active');
+    } else {
+      const htmlElements = document.querySelectorAll('.input-container');
+
+      htmlElements.forEach((item) => {
+        if((item.children[1] as HTMLInputElement).value == '') {
+          item.classList.remove("active")
+        }
+      })
+    }
   }
 }

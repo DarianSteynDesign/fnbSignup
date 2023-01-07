@@ -1,0 +1,167 @@
+@import '../../shared/shared-styles/shared-styles.scss';
+
+.layout-container {
+    position: relative;
+    display: flex;
+}
+
+.blurb-container {
+    position: relative;
+
+    .blurb-text {
+        color: white;
+        margin: 0px 5%;
+        font-size: 4rem;
+    }
+
+    .logo-container {
+
+        .logo {
+
+        }
+
+        .logo-text {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    }
+}
+
+.form-inputs-container {
+    margin: 5%;
+
+    .input-container {
+        position: relative;
+        display: flex;
+        margin: auto 0;
+
+        &.active {
+            .label-container {
+                bottom: -100px;
+                opacity: 0;
+            }
+        }
+
+        .input {
+            width: 100%;
+            border: none;
+            background: #e9e9e9;
+            border-radius: 25px;
+            padding-left: 10px;
+            font-family: 'Montserrat', sans-serif;
+            color: grey;
+        }
+
+        .label-container {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            bottom: 0;
+            height: fit-content;
+            display: flex;
+            flex-direction: row;
+            margin: auto;
+            transition: 1s ease bottom, 1s ease opacity;
+
+            .input-label {
+                margin-left: 10px;
+                color: grey;
+            }
+    
+            .input-icon {
+                display: block;
+                width: 20px;
+                height: 20px;
+                background-color: grey;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .form-button {
+        border: none;
+        background: none;
+        padding: 13px 20px;
+        color: white;
+        border-radius: 6px;
+
+        &.update {
+            background-color: #00abae;
+        }
+
+        &.sign-up {
+            background-color: orange;
+        }
+    }
+}
+
+@media screen and (min-width: $small) and (max-width: $medium) {
+    .layout-container {
+        flex-direction: column;
+        height: 43%;
+    }
+    
+    .blurb-container {
+        background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
+
+        .blurb-text {
+            margin: auto 8%;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+
+            .logo {
+                width: 70px;
+                margin: auto;
+            }
+
+            .logo-text {
+                color: white;
+                margin: 10px auto 20px auto;
+            }
+        }
+    }
+    
+    .form-inputs-container {
+        .input-container {
+            height: 40px;
+    
+            .input {
+
+            }
+    
+            .label-container {
+
+                .input-label {
+    
+                }
+        
+                .input-icon {
+
+                }
+            }
+        }
+
+        .button-container {
+            margin-top: auto;
+
+            .form-button {
+                &.update {
+                    margin-right: auto;
+                }
+        
+                &.sign-up {
+                    margin-left: auto;
+                }
+            }
+        }
+    }    
+}

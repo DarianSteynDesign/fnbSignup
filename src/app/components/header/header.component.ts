@@ -10,6 +10,8 @@ import { EventBusService } from 'src/app/services/event-bus.service';
 })
 export class HeaderComponent implements OnInit {
   public listOfUsers = [];
+  public currentUser = "";
+  public displayUserList: boolean = false;
 
   constructor(    
     private http: HttpClient,
@@ -23,11 +25,17 @@ export class HeaderComponent implements OnInit {
   private getUsers(): void {
     this.http.get<Array<UserModel>>('http://localhost:5193/api/User').subscribe((data: any) => {
         this.listOfUsers = data;
+        this.currentUser = this.listOfUsers[0].name;
     });
   }
 
   public selectUser(userInfo: UserModel): void {
     this.eventBusService.publish(userInfo);
+    this.currentUser = userInfo.name;
+  }
+
+  public toggleUserList(): void {
+    this.displayUserList = !this.displayUserList;
   }
 
 }
