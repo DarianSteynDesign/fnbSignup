@@ -1,34 +1,50 @@
-<div class="logo-container">
-    <img class="logo">
-    <p class="logo-text">Logo</p>
+<div class="blurb-container layout-container">
+    <h3 class="blurb-text">Today is the day..</h3>
+
+    <div class="logo-container">
+        <img class="logo" src="../../../assets/FNBLogo.png">
+        <p class="logo-text">Sign up today!</p>
+    </div>
 </div>
 
-<div class="form-inputs-container">
+<div class="form-inputs-container layout-container">
     <div class="input-container">
-        <label for="name">Name: </label>
-        <input id="name" type="text" [formControl]="name">
+        <div class="label-container">
+            <span class="input-icon"></span>
+            <label class="input-label" for="name">Name</label>
+        </div>
+        <input (focus)="updateInputState($event, true)"  class="input" id="name" type="text" [formControl]="name">
     </div>
 
     <div class="input-container">
-        <label for="surname">Surname: </label>
-        <input id="surname" type="text" [formControl]="surname">
+        <div class="label-container">
+            <span class="input-icon"></span>
+            <label class="input-label" for="surname">Surname</label>
+        </div>
+        <input (focus)="updateInputState($event, true)" class="input" id="surname" type="text" [formControl]="surname">
     </div>
 
     <div class="input-container">
-        <label for="email">Email: </label>
-        <input id="email" type="text" [formControl]="email">
+        <div class="label-container">
+            <span class="input-icon"></span>
+            <label class="input-label" for="email">Email</label>
+        </div>
+        <input (focus)="updateInputState($event, true)" class="input" id="email" type="text" [formControl]="email">
     </div>
 
     <div class="input-container">
-        <label for="password">Password: </label>
-        <input id="password" type="text" [formControl]="password">
+        <div class="label-container">
+            <span class="input-icon"></span>
+            <label class="input-label" for="password">Password</label>
+        </div>
+        <input (focus)="updateInputState($event, true)" class="input" id="password" type="text" [formControl]="password">
     </div>
 
-    <p>Values: {{ name.value }} , {{ surname.value }} , {{ email.value }} , {{ password.value }}</p>
-</div>
+    <div class="button-container">
+        <button class="form-button update" (click)="updateDetails(this.selectedUserId)">Update Details</button>
+        <button class="form-button sign-up" (click)="signupUsers()">Sign Up</button>
+    </div>
 
-<div class="button-container">
-    <p>{{ selectedUserId }}</p>
-    <button (click)="updateDetails(this.selectedUserId)">Update Details</button>
-    <button (click)="signupUsers()">Sign Up</button>
+    <!-- <p>Values: {{ name.value }} , {{ surname.value }} , {{ email.value }} , {{ password.value }}</p> -->
+
 </div>

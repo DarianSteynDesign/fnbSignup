@@ -1,7 +1,12 @@
-<p>header works!</p>
+<div class="header-container">
+    <div class="user-container" (click)="toggleUserList()">
+        <span class="user-icon"></span>
+        <p class="user-text">{{ currentUser }}</p>
+    </div>
 
-<ul class="user-list">
-    <li class="user-item" *ngFor="let user of listOfUsers">
-        <p class="username" (click)="selectUser(user)">{{ user.name }}</p>
-    </li>
-</ul>
+    <ul class="user-list" *ngIf="displayUserList">
+        <li class="user-item" *ngFor="let user of listOfUsers">
+            <p class="username" (click)="selectUser(user)">{{ user.name }}</p>
+        </li>
+    </ul>
+</div>
