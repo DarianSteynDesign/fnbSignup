@@ -11,7 +11,7 @@
     <div class="input-container">
         <div class="label-container">
             <span class="input-icon"></span>
-            <label class="input-label" for="name">Name: </label>
+            <label class="input-label" for="name">Name</label>
         </div>
         <input (focus)="updateInputState($event, true)"  class="input" id="name" type="text" [formControl]="name">
     </div>
@@ -19,7 +19,7 @@
     <div class="input-container">
         <div class="label-container">
             <span class="input-icon"></span>
-            <label class="input-label" for="surname">Surname: </label>
+            <label class="input-label" for="surname">Surname</label>
         </div>
         <input (focus)="updateInputState($event, true)" class="input" id="surname" type="text" [formControl]="surname">
     </div>
@@ -27,7 +27,7 @@
     <div class="input-container">
         <div class="label-container">
             <span class="input-icon"></span>
-            <label class="input-label" for="email">Email: </label>
+            <label class="input-label" for="email">Email</label>
         </div>
         <input (focus)="updateInputState($event, true)" class="input" id="email" type="text" [formControl]="email">
     </div>
@@ -35,13 +35,12 @@
     <div class="input-container">
         <div class="label-container">
             <span class="input-icon"></span>
-            <label class="input-label" for="password">Password: </label>
+            <label class="input-label" for="password">Password</label>
         </div>
         <input (focus)="updateInputState($event, true)" class="input" id="password" type="text" [formControl]="password">
     </div>
 
     <div class="button-container">
-        <p>{{ selectedUserId }}</p>
         <button class="form-button update" (click)="updateDetails(this.selectedUserId)">Update Details</button>
         <button class="form-button sign-up" (click)="signupUsers()">Sign Up</button>
     </div>

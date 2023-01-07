@@ -1,11 +1,17 @@
 @import '../../shared/shared-styles/shared-styles.scss';
 
 .header-container {
+    position: fixed;
+    width: 100%;
+    padding: 20px 0;
     background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
     
     .user-container {
+        margin: auto;
+        width: fit-content;
         display: flex;
         flex-direction: row;
+        cursor: pointer;
 
         .user-icon {
             display: block;
@@ -17,34 +23,52 @@
 
         .user-text {
             color: white;
+            margin-left: 10px;
         }
     }
 
     .user-list {
-        .user-item {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        margin: auto;
+        background: white;
+        box-shadow: 1px 1px 1px rgb(211, 211, 211);
+        padding: 0;
+        border-radius: 20px;
+        list-style-type: none;
 
+        .user-item {
+            padding: 10px 10px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgb(223, 223, 223);
+            }
         }
 
         .username {
-
+            padding: 10px 0;
         }
     }
 }
 
 @media screen and (min-width: $small) and (max-width: $medium) {
     .header-container {
-        padding: 20px 0;
-
+        position: relative;
+        
         .user-container {
-            margin: auto;
-            width: fit-content;
-    
             .user-icon {
 
             }
     
             .user-text {
-                margin-left: 10px;
+                
             }
         }
 

@@ -55,15 +55,27 @@ export class AuthFormComponent implements OnInit {
       };
 
       if(request){
-        this.http.post<Array<UserModel>>('http://localhost:5193/api/User', request).subscribe({
-          error: error => {
-              console.error('There was an error!', error);
+        this.http.post<Array<UserModel>>('http://localhost:5193/api/User', request).subscribe(
+          success => {
+            this.displaySuccess();
+          },
+          error => {
+            this.displayError();
           }
-        });
+        );
       }
     } catch (error) {
       console.log('Oops, looks like we encountered a error');
     }
+  }
+
+  private displaySuccess(): void {
+    console.log('User updated successfully');
+  }
+
+  private displayError(): void {
+    console.log('There was an error!');
+    console.error('There was an error!');
   }
 
   public updateDetails(id: string): void {
@@ -77,11 +89,14 @@ export class AuthFormComponent implements OnInit {
       };
 
       if(request && this.name.value != '' && this.surname.value != '' && this.email.value != '' && this.password.value != ''){
-        this.http.put<Array<UserModel>>(`http://localhost:5193/api/User/${id}`, request).subscribe({
-          error: error => {
-              console.error('There was an error!', error);
+        this.http.put<Array<UserModel>>(`http://localhost:5193/api/User/${id}`, request).subscribe(
+          success => {
+            this.displaySuccess();
+          },
+          error => {
+              this.displayError();
           }
-        });
+        );
       }
     } catch (error) {
       console.log('Oops, looks like we encountered a error');
@@ -95,7 +110,7 @@ export class AuthFormComponent implements OnInit {
     this.password.patchValue(value.password);
   }
 
-  public updateInputState(event: any, state?: boolean): void {
+  public updateInputState(event?: any, state?: boolean): void {
     if(state){
       event.target.parentElement.classList.add('active');
     } else {

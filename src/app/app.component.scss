@@ -1,3 +1,5 @@
+@import '../app/shared/shared-styles/shared-styles.scss';
+
 ::ng-deep .body {
     position: relative;
     font-family: 'Montserrat', sans-serif;
@@ -14,5 +16,33 @@
         top: 0;
         left: 0;
         z-index: -1;
+    }
+
+    auth {
+        display: flex;
+        height: 100%;
+    }
+
+    auth-form {
+        display: flex;
+        border-radius: 30px;
+        box-shadow: 2px 2px 2px grey;
+        width: 95%;
+        margin: auto;
+    }
+
+    @media screen and (min-width: $small) and (max-width: $medium) {
+        auth-form {
+            display: initial;
+            border-radius: none;
+            box-shadow: none;
+            width: auto;
+            margin: 0;
+        }
+
+        auth {
+            display: initial;
+            height: initial;
+        }
     }
 }

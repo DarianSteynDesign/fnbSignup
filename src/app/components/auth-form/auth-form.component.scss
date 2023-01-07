@@ -3,34 +3,48 @@
 .layout-container {
     position: relative;
     display: flex;
+    width: 50%;
 }
 
 .blurb-container {
+    display: flex;
+    flex-direction: column;
     position: relative;
+    background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
+    border-radius: 30px 0px 0px 30px;
 
     .blurb-text {
         color: white;
         margin: 0px 5%;
         font-size: 4rem;
+        width: 40%;
+        margin: 20% auto 5% auto;
     }
 
     .logo-container {
+        display: flex;
+        flex-direction: column;
 
         .logo {
-
+            width: 70px;
+            margin: auto;
         }
 
         .logo-text {
-            font-weight: bold;
-            margin-top: 10px;
+            color: white;
+            margin: 10px auto 20px auto;
         }
     }
 }
 
 .form-inputs-container {
+    display: flex;
+    flex-direction: column;
     margin: 5%;
+    height: 430px;
 
     .input-container {
+        height: 50px;
         position: relative;
         display: flex;
         margin: auto 0;
@@ -85,6 +99,18 @@
     flex-direction: row;
 
     .form-button {
+        cursor: pointer;
+        
+        &.update {
+            margin-right: auto;
+        }
+
+        &.sign-up {
+            margin-left: auto;
+        }
+    }
+
+    .form-button {
         border: none;
         background: none;
         padding: 13px 20px;
@@ -105,13 +131,15 @@
     .layout-container {
         flex-direction: column;
         height: 43%;
+        width: initial;
     }
     
     .blurb-container {
-        background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
+        border-radius: 0;
 
         .blurb-text {
             margin: auto 8%;
+            width: initial;
         }
 
         .logo-container {
@@ -152,16 +180,6 @@
 
         .button-container {
             margin-top: auto;
-
-            .form-button {
-                &.update {
-                    margin-right: auto;
-                }
-        
-                &.sign-up {
-                    margin-left: auto;
-                }
-            }
         }
     }    
 }
