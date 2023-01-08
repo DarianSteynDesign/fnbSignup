@@ -98,16 +98,20 @@
     display: flex;
     flex-direction: row;
 
+    .buttons-left {
+        margin-right: auto;
+
+        .form-button {
+            margin: 0 5px;
+        }
+    }
+
+    .buttons-right {
+        margin-left: auto;
+    }
+
     .form-button {
         cursor: pointer;
-        
-        &.update {
-            margin-right: auto;
-        }
-
-        &.sign-up {
-            margin-left: auto;
-        }
     }
 
     .form-button {
@@ -123,6 +127,14 @@
 
         &.sign-up {
             background-color: orange;
+        }
+
+        &.clear {
+            background-color: #535353;
+        }
+
+        &.delete {
+            background-color: rgb(212, 23, 23);
         }
     }
 }
@@ -180,6 +192,20 @@
 
         .button-container {
             margin-top: auto;
+            flex-direction: column;
+
+            .buttons-left {
+                margin-right: initial;
+                margin-bottom: 5px;
+                
+                .update {
+                    margin-left: 0;
+                }
+            }
+        
+            .buttons-right {
+                margin-left: initial;
+            }
         }
     }    
 }

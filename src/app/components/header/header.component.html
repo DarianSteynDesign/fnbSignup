@@ -1,12 +1,16 @@
 <div class="header-container">
-    <div class="user-container" (click)="toggleUserList()">
+    <div class="user-container">
         <span class="user-icon"></span>
         <p class="user-text">{{ currentUser }}</p>
+
+        <ul class="user-list">
+            <li class="user-item" *ngFor="let user of listOfUsers">
+                <p class="username" (click)="selectUser(user)">{{ user.name }}</p>
+            </li>
+        </ul>
     </div>
 
-    <ul class="user-list" *ngIf="displayUserList">
-        <li class="user-item" *ngFor="let user of listOfUsers">
-            <p class="username" (click)="selectUser(user)">{{ user.name }}</p>
-        </li>
-    </ul>
+    <div class="toast-container" *ngIf="toastMessage" [ngClass]="setToastActive ? 'success' : 'error'">
+        <p class="toast-text">{{ toastMessage }}</p>
+    </div>
 </div>

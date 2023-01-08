@@ -13,7 +13,7 @@
             <span class="input-icon"></span>
             <label class="input-label" for="name">Name</label>
         </div>
-        <input (focus)="updateInputState($event, true)"  class="input" id="name" type="text" [formControl]="name">
+        <input (focus)="updateInputStateToActive($event, true)"  class="input" id="name" type="text" [formControl]="name">
     </div>
 
     <div class="input-container">
@@ -21,7 +21,7 @@
             <span class="input-icon"></span>
             <label class="input-label" for="surname">Surname</label>
         </div>
-        <input (focus)="updateInputState($event, true)" class="input" id="surname" type="text" [formControl]="surname">
+        <input (focus)="updateInputStateToActive($event, true)" class="input" id="surname" type="text" [formControl]="surname">
     </div>
 
     <div class="input-container">
@@ -29,7 +29,7 @@
             <span class="input-icon"></span>
             <label class="input-label" for="email">Email</label>
         </div>
-        <input (focus)="updateInputState($event, true)" class="input" id="email" type="text" [formControl]="email">
+        <input (focus)="updateInputStateToActive($event, true)" class="input" id="email" type="text" [formControl]="email">
     </div>
 
     <div class="input-container">
@@ -37,14 +37,17 @@
             <span class="input-icon"></span>
             <label class="input-label" for="password">Password</label>
         </div>
-        <input (focus)="updateInputState($event, true)" class="input" id="password" type="text" [formControl]="password">
+        <input (focus)="updateInputStateToActive($event, true)" class="input" id="password" type="text" [formControl]="password">
     </div>
 
     <div class="button-container">
-        <button class="form-button update" (click)="updateDetails(this.selectedUserId)">Update Details</button>
-        <button class="form-button sign-up" (click)="signupUsers()">Sign Up</button>
+        <div class="buttons-left">
+            <button class="form-button update" (click)="updateDetails(false, this.selectedUserId)">Update Details</button>
+            <button class="form-button clear" (click)="clearFormInfo()">Clear</button>
+            <button class="form-button delete" (click)="updateDetails(true, this.selectedUserId)">Delete</button>
+        </div>
+        <div class="buttons-right">
+            <button class="form-button sign-up" (click)="signupUsers()">Sign Up</button>
+        </div>
     </div>
-
-    <!-- <p>Values: {{ name.value }} , {{ surname.value }} , {{ email.value }} , {{ password.value }}</p> -->
-
 </div>

@@ -3,8 +3,8 @@
 .header-container {
     position: fixed;
     width: 100%;
-    padding: 20px 0;
     background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
+    z-index: 2;
     
     .user-container {
         margin: auto;
@@ -13,24 +13,31 @@
         flex-direction: row;
         cursor: pointer;
 
+        &:hover .user-list {
+            opacity: 1;
+            left: 0;
+        }
+
         .user-icon {
             display: block;
             width: 20px;
             height: 20px;
             background-color: white;
             border-radius: 50%;
+            margin: 20px 0;
         }
 
         .user-text {
             color: white;
             margin-left: 10px;
+            padding: 20px 0;
         }
     }
 
     .user-list {
         position: absolute;
         top: 100%;
-        left: 0;
+        left: -9999px;
         right: 0;
         z-index: 2;
         display: flex;
@@ -42,6 +49,8 @@
         padding: 0;
         border-radius: 20px;
         list-style-type: none;
+        opacity: 0;
+        transition: opacity 1s ease, left 1s ease;
 
         .user-item {
             padding: 10px 10px;
@@ -54,6 +63,28 @@
 
         .username {
             padding: 10px 0;
+        }
+    }
+
+    .toast-container {
+        position: absolute;
+        right: -999px;
+        background: grey;
+        padding: 30px 30px;
+        transition: opacity 1s ease, right 1s ease;
+
+        .toast-text {
+            color: white;
+        }
+
+        &.success {
+            right: 0px;
+            background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
+        }
+
+        &.error {
+            right: 0px;
+            background: rgb(160, 0, 13);
         }
     }
 }
