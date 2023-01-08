@@ -3,6 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
 import { EventBusService } from 'src/app/services/event-bus.service';
 import { UserModel } from 'src/app/models/user.model';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import { EventPayloadModel } from 'src/app/models/event-payload.model';
+import { ToastModel } from 'src/app/models/toast-payload.model';
 
 @Component({
   selector: 'auth-form',
@@ -16,18 +20,21 @@ export class AuthFormComponent implements OnInit {
   public email: FormControl = new FormControl('');
   public password: FormControl = new FormControl('');
   public selectedUserId: string = "";
+
+  private userSelectSubscription: Subscription;
   
   constructor(
     private http: HttpClient,
-    private eventBusService: EventBusService
+    private eventBusService: EventBusService,
+    private userService: UserService
   ) { }
 
   @HostListener('document:click', ['$event'])
   documentClick(event: any): void {
     if(event.target.classList.contains('input')) {
-      this.updateInputState(event, true);
+      this.updateInputStateToActive(event, true);
     } else {
-      this.updateInputState(event, false);
+      this.updateInputStateToActive(event, false);
     }
   }
 
@@ -36,9 +43,12 @@ export class AuthFormComponent implements OnInit {
   }
 
   private registerSubscriptions(): void {
-    this.eventBusService.channelObservable.subscribe((response: UserModel) => {
-      this.selectedUserId = response.id;
-      this.updateFormInfo(response);
+    this.userSelectSubscription = this.eventBusService.channelObservable.subscribe((response: EventPayloadModel) => {
+      if(response && response.channel == 'userSelect'){
+        this.selectedUserId = response.body.id;
+        this.updateFormInfo(response.body);
+        this.allInputsActive();
+      }
     });
   }
 
@@ -55,12 +65,14 @@ export class AuthFormComponent implements OnInit {
       };
 
       if(request){
-        this.http.post<Array<UserModel>>('http://localhost:5193/api/User', request).subscribe(
+        this.userService.createUser(request).subscribe(
           success => {
-            this.displaySuccess();
+            this.displaySuccess('Sign up successful!');
+            this.updateUserListEvent(genRanHex);
+            this.clearFormInfo();
           },
           error => {
-            this.displayError();
+            this.displayError('Error signing up');
           }
         );
       }
@@ -69,16 +81,7 @@ export class AuthFormComponent implements OnInit {
     }
   }
 
-  private displaySuccess(): void {
-    console.log('User updated successfully');
-  }
-
-  private displayError(): void {
-    console.log('There was an error!');
-    console.error('There was an error!');
-  }
-
-  public updateDetails(id: string): void {
+  public updateDetails(deleteUser: boolean, id: string): void {
     try {
       let request: UserModel = {
         "id": id,
@@ -88,15 +91,29 @@ export class AuthFormComponent implements OnInit {
         "password": this.password.value
       };
 
-      if(request && this.name.value != '' && this.surname.value != '' && this.email.value != '' && this.password.value != ''){
-        this.http.put<Array<UserModel>>(`http://localhost:5193/api/User/${id}`, request).subscribe(
+      if(deleteUser){
+        this.userService.deleteUser(id, request).subscribe(
           success => {
-            this.displaySuccess();
+            this.displaySuccess('User deleted successfully');
+            this.updateUserListEvent(id);
+            this.clearFormInfo();
           },
           error => {
-              this.displayError();
+              this.displayError('Error deleting user');
           }
         );
+      } else {
+        if(request && this.name.value != '' && this.surname.value != '' && this.email.value != '' && this.password.value != '') {
+          this.userService.updateUser(id, request).subscribe(
+            success => {
+              this.displaySuccess('User updated successfully');
+              this.updateUserListEvent(id);
+            },
+            error => {
+                this.displayError('Error updating user');
+            }
+          );
+        }
       }
     } catch (error) {
       console.log('Oops, looks like we encountered a error');
@@ -110,8 +127,33 @@ export class AuthFormComponent implements OnInit {
     this.password.patchValue(value.password);
   }
 
-  public updateInputState(event?: any, state?: boolean): void {
-    if(state){
+  public clearFormInfo(): void {
+    this.name.patchValue('');
+    this.surname.patchValue('');
+    this.email.patchValue('');
+    this.password.patchValue('');
+  }
+
+  private displaySuccess(message: string): void {
+    let toastPayload: ToastModel = {state: true, message: message};
+    this.eventBusService.publish(new EventPayloadModel('requestState', toastPayload));
+    // "Logging"
+    console.log('User updated successfully');
+  }
+
+  private displayError(message: string): void {
+    let toastPayload: ToastModel = {state: false, message: message};
+    this.eventBusService.publish(new EventPayloadModel('requestState', toastPayload));
+    // "Logging"
+    console.log('There was an error!');
+  }
+
+  private updateUserListEvent(updateUserId: string): void {
+    this.eventBusService.publish(new EventPayloadModel('userListUpdate', updateUserId));
+  }
+
+  public updateInputStateToActive(event?: any, activeState?: boolean): void {
+    if(activeState && event){
       event.target.parentElement.classList.add('active');
     } else {
       const htmlElements = document.querySelectorAll('.input-container');
@@ -122,5 +164,17 @@ export class AuthFormComponent implements OnInit {
         }
       })
     }
+  }
+
+  private allInputsActive(): void {
+    const htmlElements = document.querySelectorAll('.input-container');
+
+    htmlElements.forEach((item) => {
+      item.classList.add("active")
+    });
+  }
+
+  ngOnDestroy() {
+    if(this.userSelectSubscription) this.userSelectSubscription.unsubscribe();
   }
 }
