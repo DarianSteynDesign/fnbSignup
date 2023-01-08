@@ -192,6 +192,20 @@
 
         .button-container {
             margin-top: auto;
+            flex-direction: column;
+
+            .buttons-left {
+                margin-right: initial;
+                margin-bottom: 5px;
+                
+                .update {
+                    margin-left: 0;
+                }
+            }
+        
+            .buttons-right {
+                margin-left: initial;
+            }
         }
     }    
 }
