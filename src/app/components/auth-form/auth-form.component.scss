@@ -83,11 +83,13 @@
             }
     
             .input-icon {
+                font-family: 'icomoon';
                 display: block;
                 width: 20px;
                 height: 20px;
-                background-color: grey;
+                color: grey;
                 border-radius: 50%;
+                margin-left: 10px;
             }
         }
     }
@@ -115,11 +117,33 @@
     }
 
     .form-button {
+        position: relative;
         border: none;
         background: none;
         padding: 13px 20px;
         color: white;
-        border-radius: 6px;
+        border-radius: 25px;
+        overflow: hidden;
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: -60px;
+            content: "";
+            display: block;
+            width: 80px;
+            height: 20px;
+            transform: rotate(125deg);
+            opacity: 0.15;
+            background-color: #fff;
+            transition: left 1s ease;
+        }
+
+        &:hover {
+            &::before {
+                left: 100%;
+            }
+        }
 
         &.update {
             background-color: #00abae;
@@ -152,6 +176,7 @@
         .blurb-text {
             margin: auto 8%;
             width: initial;
+            text-align: center;
         }
 
         .logo-container {
