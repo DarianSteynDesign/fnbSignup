@@ -1,28 +1,37 @@
 @import '../../shared/shared-styles/shared-styles.scss';
 
 .header-container {
+    display: flex;
     position: fixed;
     width: 100%;
     background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
     z-index: 2;
+
+    .header-logo {
+        width: 2%;
+        height: 2%;
+        margin: auto auto auto 10px;
+        min-width: 40px;
+    }
     
     .user-container {
-        margin: auto;
+        margin-left: auto;
         width: fit-content;
         display: flex;
         flex-direction: row;
         cursor: pointer;
+        margin-right: 20px;
 
         &:hover .user-list {
             opacity: 1;
-            left: 0;
         }
 
         .user-icon {
+            font-family: 'icomoon';
             display: block;
             width: 20px;
             height: 20px;
-            background-color: white;
+            color: white;
             border-radius: 50%;
             margin: 20px 0;
         }
@@ -37,24 +46,35 @@
     .user-list {
         position: absolute;
         top: 100%;
-        left: -9999px;
-        right: 0;
         z-index: 2;
         display: flex;
         flex-direction: column;
-        width: fit-content;
+        width: 230px;
         margin: auto;
         background: white;
         box-shadow: 1px 1px 1px rgb(211, 211, 211);
         padding: 0;
-        border-radius: 20px;
         list-style-type: none;
         opacity: 0;
         transition: opacity 1s ease, left 1s ease;
 
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: white;
+            margin: auto;
+            transform: rotate(45deg);
+            top: -3%;
+        }
+
         .user-item {
             padding: 10px 10px;
             cursor: pointer;
+            text-align: center;
 
             &:hover {
                 background-color: rgb(223, 223, 223);
@@ -68,10 +88,12 @@
 
     .toast-container {
         position: absolute;
+        top: 60px;
         right: -999px;
-        background: grey;
+        background: rgb(160, 0, 13);
         padding: 30px 30px;
-        transition: opacity 1s ease, right 1s ease;
+        transition: right 1s ease, opacity 1s ease;
+        opacity: 0;
 
         .toast-text {
             color: white;
@@ -80,11 +102,7 @@
         &.success {
             right: 0px;
             background: linear-gradient(135deg,  #00ac8c 0%,#00abae 100%);
-        }
-
-        &.error {
-            right: 0px;
-            background: rgb(160, 0, 13);
+            opacity: 1;
         }
     }
 }

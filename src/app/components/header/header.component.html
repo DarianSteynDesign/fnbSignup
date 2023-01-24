@@ -1,7 +1,9 @@
 <div class="header-container">
+    <img class="header-logo" src="../../../assets/FNBLogo.png">
+
     <div class="user-container">
-        <span class="user-icon"></span>
-        <p class="user-text">{{ currentUser }}</p>
+        <span class="user-icon icon-user"></span>
+        <p class="user-text">Welcome back, {{ currentUser }}</p>
 
         <ul class="user-list">
             <li class="user-item" *ngFor="let user of listOfUsers">
@@ -10,7 +12,9 @@
         </ul>
     </div>
 
-    <div class="toast-container" *ngIf="toastMessage" [ngClass]="setToastActive ? 'success' : 'error'">
+    
+
+    <div class="toast-container" [ngClass]="toastMessage && setToastActive ? 'success' : ''">
         <p class="toast-text">{{ toastMessage }}</p>
     </div>
 </div>

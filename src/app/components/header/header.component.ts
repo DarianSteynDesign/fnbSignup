@@ -58,13 +58,14 @@ export class HeaderComponent implements OnInit {
     this.currentUser = userInfo.name;
   }
 
-  private displayToast(toastOptions: ToastModel): void {
+  public displayToast(toastOptions: ToastModel): void {
     this.setToastActive = toastOptions.state;
     this.toastMessage = toastOptions.message;
 
     setTimeout(() => {
+      this.setToastActive = false;
       this.toastMessage = "";
-    }, 3000)
+    }, 3500)
   }
 
   ngOnDestroy() {
