@@ -25,7 +25,7 @@ DB/data structure based on appsettings:
 
 ![image](https://user-images.githubusercontent.com/39791440/211009668-fb1a93d7-dcbe-45a7-a318-71998b2b08b1.png)
 
-Start mongo container on docker UI or in terminal. Run Services solution. Clone and run Angular UI locally (https://github.com/DarianSteynDesign/fnbSignup), make sure ports align.
+Start mongo container on docker UI or in terminal. Run Services solution (https://github.com/DarianSteynDesign/fnbSignupServices). Clone and run Angular UI locally (https://github.com/DarianSteynDesign/fnbSignup), make sure ports align between services "ConnectionString": "mongodb://localhost:27017" and local mongoDB ports.
 
 ## Development server
 
