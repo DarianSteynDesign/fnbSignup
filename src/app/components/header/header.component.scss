@@ -87,7 +87,7 @@
     }
 
     .toast-container {
-        position: absolute;
+        position: fixed;
         top: 60px;
         right: -999px;
         background: rgb(160, 0, 13);
